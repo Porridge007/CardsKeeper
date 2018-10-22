@@ -1,3 +1,4 @@
+#! /usr/bin/python
 import cards_tools
 
 while True:
