@@ -1,6 +1,7 @@
 #! /usr/bin/python
 import cards_tools
 
+cards_tools.load_data()
 while True:
     cards_tools.show_menu()
     action_str = input("请下指令，主人\n")
@@ -13,6 +14,7 @@ while True:
         elif action_str == "3":
             cards_tools.search_card()
     elif action_str == "0":
+        cards_tools.save_data()
         print("寨见了哟～主人sama")
         break
     else:
