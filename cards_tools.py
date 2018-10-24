@@ -1,4 +1,5 @@
-import pickle,os
+import pickle, os
+
 card_list = []
 
 
@@ -29,6 +30,7 @@ def new_card():
     }
     card_list.append(card_dict)
     print("我记下%s咯！" % name_str)
+    save_data()
 
 
 def show_all():
@@ -55,7 +57,7 @@ def search_card():
     print("-" * 50)
     search_name = input("查谁咧？")
     for card_dict in card_list:
-        if caOBrd_dict["name"] == search_name:
+        if card_dict["name"] == search_name:
             for name in ["姓名", "电话", "QQ", "邮箱"]:
                 print(name, end="\t\t")
             print("")
@@ -84,9 +86,11 @@ def deal_card(found_dict):
         found_dict["phone"] = input_card_info(found_dict["phone"], "手机号[回车不修改]：")
         found_dict["qq"] = input_card_info(found_dict["qq"], "QQ[回车不修改]:")
         found_dict["email"] = input_card_info(found_dict["email"], "邮箱[回车不修改]:")
+        save_data()
         print("修改完成")
     elif action_str == "2":
         card_list.remove(found_dict)
+        save_data()
         print("吼，木有了")
     else:
         return
@@ -105,13 +109,14 @@ def input_card_info(dict_value, tip_message):
     else:
         return dict_value
 
+
 def load_data():
     global card_list
     if "data" in os.listdir("bin"):
-        with open("bin/data","rb") as f:
-             card_list = pickle.load(f)
+        with open("bin/data", "rb") as f:
+            card_list = pickle.load(f)
+
 
 def save_data():
-    with open("bin/data","wb") as f:
-        pickle.dump(card_list,f)
-
+    with open("bin/data", "wb") as f:
+        pickle.dump(card_list, f)
